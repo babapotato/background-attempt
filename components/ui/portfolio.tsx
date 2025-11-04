@@ -11,27 +11,61 @@ export function Portfolio() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['hero', 'gallery', 'about', 'contact']
-      const viewportHeight = window.innerHeight
-      const scrollPosition = window.scrollY
-      let current = 'hero'
-      let maxVisible = 0
+    const sections = ['hero', 'gallery', 'about', 'contact']
+    const sectionElements = sections.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[]
+    
+    if (sectionElements.length === 0) return
 
-      // Find the section with the most visible area in the viewport
+    // Use IntersectionObserver for better accuracy
+    const observerOptions = {
+      root: null, // viewport
+      rootMargin: '-20% 0px -20% 0px', // Require at least 60% visibility
+      threshold: [0, 0.5, 1.0]
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      // Find the entry with the highest intersection ratio
+      let maxRatio = 0
+      let mostVisible: string | null = null
+
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+          maxRatio = entry.intersectionRatio
+          mostVisible = entry.target.id
+        }
+      })
+
+      // If we found a visible section, update state
+      if (mostVisible) {
+        setCurrentSection((prev) => {
+          if (prev !== mostVisible) {
+            return mostVisible as string
+          }
+          return prev
+        })
+      }
+    }, observerOptions)
+
+    // Observe all sections
+    sectionElements.forEach(element => {
+      observer.observe(element)
+    })
+
+    // Fallback: also check on scroll for immediate feedback
+    const handleScroll = () => {
+      const viewportCenter = window.innerHeight / 2
+      let current = 'hero'
+      let closestDistance = Infinity
+
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId)
         if (element) {
           const rect = element.getBoundingClientRect()
+          const sectionCenter = rect.top + rect.height / 2
+          const distance = Math.abs(viewportCenter - sectionCenter)
           
-          // Calculate how much of the section is visible in the viewport
-          const visibleTop = Math.max(0, rect.top)
-          const visibleBottom = Math.min(viewportHeight, rect.bottom)
-          const visibleHeight = Math.max(0, visibleBottom - visibleTop)
-          
-          // If this section has more visible area than the previous best, use it
-          if (visibleHeight > maxVisible) {
-            maxVisible = visibleHeight
+          if (distance < closestDistance) {
+            closestDistance = distance
             current = sectionId
           }
         }
@@ -40,27 +74,25 @@ export function Portfolio() {
       setCurrentSection(current)
     }
 
-    // Use requestAnimationFrame for smooth updates
-    let rafId: number | null = null
+    let ticking = false
     const onScroll = () => {
-      if (rafId === null) {
-        rafId = requestAnimationFrame(() => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
           handleScroll()
-          rafId = null
+          ticking = false
         })
+        ticking = true
       }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', handleScroll, { passive: true })
-    handleScroll() // Initial check
+    
+    // Initial check
+    setTimeout(() => handleScroll(), 100)
 
     return () => {
+      observer.disconnect()
       window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', handleScroll)
-      if (rafId !== null) {
-        cancelAnimationFrame(rafId)
-      }
     }
   }, [])
 

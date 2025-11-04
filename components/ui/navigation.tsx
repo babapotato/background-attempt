@@ -14,6 +14,11 @@ export function Navigation({ currentSection }: NavigationProps) {
     { id: 'contact', label: 'Contact' },
   ]
 
+  // Debug: log current section
+  React.useEffect(() => {
+    console.log('Navigation received currentSection:', currentSection)
+  }, [currentSection])
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
