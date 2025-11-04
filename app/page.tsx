@@ -1,6 +1,6 @@
-import { WavesDemo } from "@/components/ui/waves-demo"
+import { Portfolio } from "@/components/ui/portfolio"
 
 export default function Home() {
-  return <WavesDemo />
+  return <Portfolio />
 }
 
