@@ -1,47 +1,23 @@
 {
   "hero": {
-    "text": "Transforming ideas into reality through creative excellence and technical expertise. We deliver exceptional results that exceed expectations and drive meaningful impact."
+    "text": "Our way of working is rooted in Kolbs model of learning. This means we help you by making graphic design for you, with you, allowing you to reflect, learn and change it on the fly. No long waiting times and disappointments. We got you covered. "
   },
   "gallery": {
     "items": [
       {
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop",
-        "title": "Project 1"
+        "image": "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fnz.pinterest.com%2Fpin%2F37225134414814884%2F&ved=0CBUQjRxqFwoTCKCTu4rE2ZADFQAAAAAdAAAAABAH&opi=89978449",
+        "title": "Fat cats love skinny bitches"
       },
       {
-        "image": "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=400&h=400&fit=crop",
-        "title": "Project 2"
-      },
-      {
-        "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=400&fit=crop",
-        "title": "Project 3"
-      },
-      {
-        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=400&fit=crop",
-        "title": "Project 4"
-      },
-      {
-        "image": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400&h=400&fit=crop",
-        "title": "Project 5"
-      },
-      {
-        "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop",
-        "title": "Project 6"
-      },
-      {
-        "image": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=400&fit=crop",
-        "title": "Project 7"
-      },
-      {
-        "image": "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=400&fit=crop",
-        "title": "Project 8"
+        "image": "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.reddit.com%2Fr%2FSkinnypigs%2Fcomments%2F17akd3w%2Ffat_ass_cow%2F&ved=0CBUQjRxqFwoTCMj8mp_E2ZADFQAAAAAdAAAAABAe&opi=89978449",
+        "title": "but theres also fatass pigs that like fatass skinny bitches"
       }
     ]
   },
   "about": {
     "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
     "text1": "We are a passionate team of creative professionals dedicated to delivering exceptional results. With years of experience and a commitment to excellence, we bring innovative solutions to every project.",
-    "text2": "Our mission is to create meaningful connections through design, technology, and storytelling. We believe in the power of collaboration and the importance of understanding our clients' unique needs."
+    "text2": ""
   },
   "contact": {
     "email": {
@@ -62,4 +38,3 @@
     }
   }
 }
-
