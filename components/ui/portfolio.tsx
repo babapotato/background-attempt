@@ -4,7 +4,6 @@ import * as React from 'react'
 import { useEffect, useState, useRef } from 'react'
 import { Waves } from '@/components/ui/wave-background'
 import { Navigation } from '@/components/ui/navigation'
-import { Mail, Phone, Instagram, Linkedin } from 'lucide-react'
 
 export function Portfolio() {
   const [currentSection, setCurrentSection] = useState('hero')
@@ -168,7 +167,7 @@ export function Portfolio() {
                     <img
                       src={image}
                       alt={`Gallery item ${index + 1}`}
-                      className="w-full h-full object-cover rounded-lg transition-all duration-300 group-hover:brightness-50 group-active:brightness-50 shadow-2xl"
+                      className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-50 group-active:brightness-50 shadow-2xl"
                     />
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300">
                       <p className="text-white text-base sm:text-xl md:text-2xl font-semibold text-center px-4">
@@ -196,7 +195,7 @@ export function Portfolio() {
                   <img
                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
                     alt="About us"
-                    className="w-full h-full object-cover rounded-lg shadow-2xl"
+                    className="w-full h-full object-cover shadow-2xl"
                   />
                 </div>
                 <div className="text-center max-w-2xl">
@@ -229,43 +228,31 @@ export function Portfolio() {
             <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12">
               <a
                 href="mailto:contact@example.com"
-                className="group flex flex-col items-center gap-3 sm:gap-4 p-4 sm:p-6 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all duration-300 min-w-[120px] sm:min-w-[140px]"
+                className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
               >
-                <Mail className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-white" />
-                <span className="text-white text-sm sm:text-lg md:text-xl font-semibold">
-                  <span className="text-with-underlay-sm">Email</span>
-                </span>
+                <span className="text-with-underlay-sm">Email</span>
               </a>
               <a
                 href="tel:+1234567890"
-                className="group flex flex-col items-center gap-3 sm:gap-4 p-4 sm:p-6 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all duration-300 min-w-[120px] sm:min-w-[140px]"
+                className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
               >
-                <Phone className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-white" />
-                <span className="text-white text-sm sm:text-lg md:text-xl font-semibold">
-                  <span className="text-with-underlay-sm">Phone</span>
-                </span>
+                <span className="text-with-underlay-sm">Phone</span>
               </a>
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col items-center gap-3 sm:gap-4 p-4 sm:p-6 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all duration-300 min-w-[120px] sm:min-w-[140px]"
+                className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
               >
-                <Instagram className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-white" />
-                <span className="text-white text-sm sm:text-lg md:text-xl font-semibold">
-                  <span className="text-with-underlay-sm">Instagram</span>
-                </span>
+                <span className="text-with-underlay-sm">Instagram</span>
               </a>
               <a
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col items-center gap-3 sm:gap-4 p-4 sm:p-6 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all duration-300 min-w-[120px] sm:min-w-[140px]"
+                className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
               >
-                <Linkedin className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-white" />
-                <span className="text-white text-sm sm:text-lg md:text-xl font-semibold">
-                  <span className="text-with-underlay-sm">LinkedIn</span>
-                </span>
+                <span className="text-with-underlay-sm">LinkedIn</span>
               </a>
             </div>
           </div>
