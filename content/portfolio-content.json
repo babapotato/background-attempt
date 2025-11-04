@@ -1,0 +1,65 @@
+{
+  "hero": {
+    "text": "Transforming ideas into reality through creative excellence and technical expertise. We deliver exceptional results that exceed expectations and drive meaningful impact."
+  },
+  "gallery": {
+    "items": [
+      {
+        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop",
+        "title": "Project 1"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=400&h=400&fit=crop",
+        "title": "Project 2"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=400&fit=crop",
+        "title": "Project 3"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=400&fit=crop",
+        "title": "Project 4"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400&h=400&fit=crop",
+        "title": "Project 5"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop",
+        "title": "Project 6"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=400&fit=crop",
+        "title": "Project 7"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=400&fit=crop",
+        "title": "Project 8"
+      }
+    ]
+  },
+  "about": {
+    "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+    "text1": "We are a passionate team of creative professionals dedicated to delivering exceptional results. With years of experience and a commitment to excellence, we bring innovative solutions to every project.",
+    "text2": "Our mission is to create meaningful connections through design, technology, and storytelling. We believe in the power of collaboration and the importance of understanding our clients' unique needs."
+  },
+  "contact": {
+    "email": {
+      "text": "Email",
+      "href": "mailto:contact@example.com"
+    },
+    "phone": {
+      "text": "Phone",
+      "href": "tel:+1234567890"
+    },
+    "instagram": {
+      "text": "Instagram",
+      "href": "https://instagram.com"
+    },
+    "linkedin": {
+      "text": "LinkedIn",
+      "href": "https://linkedin.com"
+    }
+  }
+}
+

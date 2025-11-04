@@ -4,8 +4,10 @@ import * as React from 'react'
 import { useEffect, useState, useRef } from 'react'
 import { Waves } from '@/components/ui/wave-background'
 import { Navigation } from '@/components/ui/navigation'
+import { getPortfolioContent } from '@/lib/content'
 
 export function Portfolio() {
+  const content = getPortfolioContent()
   const [currentSection, setCurrentSection] = useState('hero')
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -95,17 +97,6 @@ export function Portfolio() {
     }
   }, [])
 
-  // Placeholder images - using Unsplash placeholders
-  const galleryImages = [
-    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=400&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=400&fit=crop',
-  ]
 
   // Handle iPhone Safari viewport height issue
   useEffect(() => {
@@ -144,8 +135,7 @@ export function Portfolio() {
           <div className="container mx-auto px-4 md:px-8 text-center">
             <p className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
               <span className="text-with-underlay-sm">
-                Transforming ideas into reality through creative excellence and technical expertise. 
-                We deliver exceptional results that exceed expectations and drive meaningful impact.
+                {content.hero.text}
               </span>
             </p>
           </div>
@@ -159,20 +149,20 @@ export function Portfolio() {
           <div className="container mx-auto px-4 md:px-8">
             <div className="overflow-x-auto pb-4 scrollbar-hide">
               <div className="flex gap-3 sm:gap-4 md:gap-6 lg:gap-8 px-4">
-                {galleryImages.map((image, index) => (
+                {content.gallery.items.map((item, index) => (
                   <div
                     key={index}
                     className="group relative flex-shrink-0 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 cursor-pointer"
                   >
                     <img
-                      src={image}
-                      alt={`Gallery item ${index + 1}`}
+                      src={item.image}
+                      alt={item.title}
                       className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-50 group-active:brightness-50 shadow-2xl"
                     />
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300">
                       <p className="text-white text-base sm:text-xl md:text-2xl font-semibold text-center px-4">
                         <span className="text-with-underlay-sm">
-                          Project {index + 1}
+                          {item.title}
                         </span>
                       </p>
                     </div>
@@ -193,7 +183,7 @@ export function Portfolio() {
               <div className="flex flex-col items-center gap-8 md:gap-12">
                 <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 flex-shrink-0">
                   <img
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
+                    src={content.about.image}
                     alt="About us"
                     className="w-full h-full object-cover shadow-2xl"
                   />
@@ -201,16 +191,12 @@ export function Portfolio() {
                 <div className="text-center max-w-2xl">
                   <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed mb-4">
                     <span className="text-with-underlay-sm">
-                      We are a passionate team of creative professionals dedicated to delivering 
-                      exceptional results. With years of experience and a commitment to excellence, 
-                      we bring innovative solutions to every project.
+                      {content.about.text1}
                     </span>
                   </p>
                   <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed">
                     <span className="text-with-underlay-sm">
-                      Our mission is to create meaningful connections through design, technology, 
-                      and storytelling. We believe in the power of collaboration and the importance 
-                      of understanding our clients' unique needs.
+                      {content.about.text2}
                     </span>
                   </p>
                 </div>
@@ -227,32 +213,32 @@ export function Portfolio() {
           <div className="container mx-auto px-4 md:px-8 text-center">
             <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12">
               <a
-                href="mailto:contact@example.com"
+                href={content.contact.email.href}
                 className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
               >
-                <span className="text-with-underlay-sm">Email</span>
+                <span className="text-with-underlay-sm">{content.contact.email.text}</span>
               </a>
               <a
-                href="tel:+1234567890"
+                href={content.contact.phone.href}
                 className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
               >
-                <span className="text-with-underlay-sm">Phone</span>
+                <span className="text-with-underlay-sm">{content.contact.phone.text}</span>
               </a>
               <a
-                href="https://instagram.com"
+                href={content.contact.instagram.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
               >
-                <span className="text-with-underlay-sm">Instagram</span>
+                <span className="text-with-underlay-sm">{content.contact.instagram.text}</span>
               </a>
               <a
-                href="https://linkedin.com"
+                href={content.contact.linkedin.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
               >
-                <span className="text-with-underlay-sm">LinkedIn</span>
+                <span className="text-with-underlay-sm">{content.contact.linkedin.text}</span>
               </a>
             </div>
           </div>
