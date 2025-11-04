@@ -98,41 +98,55 @@ export function Waves({
 
     useEffect(() => {
 
-        if (!containerRef.current || !svgRef.current) return
+        // Wait for DOM to be ready
+        const init = () => {
+            if (!containerRef.current || !svgRef.current) {
+                // Retry after a short delay if refs aren't ready
+                setTimeout(init, 100)
+                return
+            }
 
 
 
-        // Initialize noise generator
+            // Initialize noise generator
 
-        noiseRef.current = createNoise2D()
-
-
-
-        // Initialize size and lines
-
-        setSize()
-
-        setLines()
+            noiseRef.current = createNoise2D()
 
 
 
-        // Bind events
+            // Initialize size and lines
 
-        window.addEventListener('resize', onResize)
+            setSize()
 
-        window.addEventListener('mousemove', onMouseMove)
-
-        containerRef.current.addEventListener('touchmove', onTouchMove, { passive: false })
+            setLines()
 
 
 
-        // Start animation
+            // Bind events
 
-        rafRef.current = requestAnimationFrame(tick)
+            window.addEventListener('resize', onResize)
+
+            window.addEventListener('mousemove', onMouseMove)
+
+            if (containerRef.current) {
+                containerRef.current.addEventListener('touchmove', onTouchMove, { passive: false })
+            }
 
 
+
+            // Start animation
+
+            rafRef.current = requestAnimationFrame(tick)
+        }
+
+        // Use requestAnimationFrame to ensure DOM is ready
+        const rafId = requestAnimationFrame(() => {
+            init()
+        })
 
         return () => {
+
+            cancelAnimationFrame(rafId)
 
             if (rafRef.current) cancelAnimationFrame(rafRef.current)
 
@@ -140,11 +154,13 @@ export function Waves({
 
             window.removeEventListener('mousemove', onMouseMove)
 
-            containerRef.current?.removeEventListener('touchmove', onTouchMove)
+            if (containerRef.current) {
+                containerRef.current.removeEventListener('touchmove', onTouchMove)
+            }
 
         }
 
-    }, [])
+    }, [strokeColor, backgroundColor])
 
 
 
@@ -271,6 +287,8 @@ export function Waves({
             path.setAttribute('stroke', strokeColor)
 
             path.setAttribute('stroke-width', '1')
+
+            path.setAttribute('opacity', '1')
 
 
 

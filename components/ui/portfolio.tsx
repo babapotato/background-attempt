@@ -48,7 +48,7 @@ export function Portfolio() {
   return (
     <div ref={containerRef} className="relative w-full min-h-full">
       {/* Waves Background */}
-      <div className="fixed inset-0 w-full h-full overflow-hidden" style={{ zIndex: -1 }}>
+      <div className="fixed inset-0 w-full h-full overflow-hidden" style={{ zIndex: 0 }}>
         <Waves className="h-full w-full" strokeColor="#ffffff" backgroundColor="#000000" />
       </div>
 
@@ -56,7 +56,7 @@ export function Portfolio() {
       <Navigation currentSection={currentSection} />
 
       {/* Main Content Container */}
-      <div className="relative z-10">
+      <div className="relative" style={{ zIndex: 10 }}>
         {/* Section 1: Hero/Value Proposition */}
         <section
           id="hero"
