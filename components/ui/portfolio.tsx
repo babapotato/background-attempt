@@ -4,12 +4,44 @@ import * as React from 'react'
 import { useEffect, useState, useRef } from 'react'
 import { Waves } from '@/components/ui/wave-background'
 import { Navigation } from '@/components/ui/navigation'
-import { getPortfolioContent } from '@/lib/content'
+import { getPortfolioContent } from '@/lib/sanity-queries'
+import { urlFor } from '@/lib/sanity'
+import { getPortfolioContent as getFallbackContent } from '@/lib/content'
 
 export function Portfolio() {
-  const content = getPortfolioContent()
+  const [content, setContent] = useState<ReturnType<typeof getFallbackContent> | null>(null)
   const [currentSection, setCurrentSection] = useState('hero')
   const containerRef = useRef<HTMLDivElement>(null)
+
+  // Fetch content from Sanity
+  useEffect(() => {
+    async function fetchContent() {
+      const sanityContent = await getPortfolioContent()
+      if (sanityContent) {
+        // Transform Sanity image objects to URLs
+        const transformedContent = {
+          hero: sanityContent.hero,
+          gallery: {
+            items: sanityContent.gallery.items.map((item) => ({
+              image: urlFor(item.image).width(800).height(800).url(),
+              title: item.title,
+            })),
+          },
+          about: {
+            image: urlFor(sanityContent.about.image).width(800).height(800).url(),
+            text1: sanityContent.about.text1,
+            text2: sanityContent.about.text2,
+          },
+          contact: sanityContent.contact,
+        }
+        setContent(transformedContent)
+      } else {
+        // Fallback to JSON content if Sanity is not configured
+        setContent(getFallbackContent())
+      }
+    }
+    fetchContent()
+  }, [])
 
   useEffect(() => {
     const sections = ['hero', 'gallery', 'about', 'contact']
@@ -114,6 +146,14 @@ export function Portfolio() {
       window.removeEventListener('orientationchange', setViewportHeight)
     }
   }, [])
+
+  if (!content) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-black text-white">
+        <p>Loading...</p>
+      </div>
+    )
+  }
 
   return (
     <div ref={containerRef} className="relative w-full min-h-full">
