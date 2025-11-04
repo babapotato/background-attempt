@@ -13,19 +13,26 @@ export function Portfolio() {
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['hero', 'gallery', 'about', 'contact']
-      const scrollPosition = window.scrollY + window.innerHeight / 2
+      const viewportHeight = window.innerHeight
+      const scrollPosition = window.scrollY
       let current = 'hero'
+      let maxVisible = 0
 
+      // Find the section with the most visible area in the viewport
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId)
         if (element) {
           const rect = element.getBoundingClientRect()
-          const elementTop = window.scrollY + rect.top
-          const elementBottom = elementTop + rect.height
           
-          if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
+          // Calculate how much of the section is visible in the viewport
+          const visibleTop = Math.max(0, rect.top)
+          const visibleBottom = Math.min(viewportHeight, rect.bottom)
+          const visibleHeight = Math.max(0, visibleBottom - visibleTop)
+          
+          // If this section has more visible area than the previous best, use it
+          if (visibleHeight > maxVisible) {
+            maxVisible = visibleHeight
             current = sectionId
-            break
           }
         }
       }
@@ -45,10 +52,12 @@ export function Portfolio() {
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', handleScroll, { passive: true })
     handleScroll() // Initial check
 
     return () => {
       window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', handleScroll)
       if (rafId !== null) {
         cancelAnimationFrame(rafId)
       }
