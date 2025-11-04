@@ -85,6 +85,25 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+  
+  /* Text with black underlay */
+  .text-with-underlay {
+    display: inline;
+    background-color: black;
+    padding: 0.2em 0.4em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    line-height: 1.4;
+  }
+  
+  .text-with-underlay-sm {
+    display: inline;
+    background-color: black;
+    padding: 0.15em 0.3em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    line-height: 1.4;
+  }
 }
 
 /* Hide Next.js dev indicator */
