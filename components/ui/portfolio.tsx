@@ -46,10 +46,10 @@ export function Portfolio() {
   ]
 
   return (
-    <div ref={containerRef} className="relative w-full h-full">
+    <div ref={containerRef} className="relative w-full min-h-full">
       {/* Waves Background */}
-      <div className="fixed inset-0 w-screen h-screen bg-black overflow-hidden -z-10">
-        <Waves className="h-full w-full" />
+      <div className="fixed inset-0 w-full h-full overflow-hidden" style={{ zIndex: -1 }}>
+        <Waves className="h-full w-full" strokeColor="#ffffff" backgroundColor="#000000" />
       </div>
 
       {/* Navigation */}
