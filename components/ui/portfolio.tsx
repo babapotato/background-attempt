@@ -45,10 +45,27 @@ export function Portfolio() {
     'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=400&fit=crop',
   ]
 
+  // Handle iPhone Safari viewport height issue
+  useEffect(() => {
+    const setViewportHeight = () => {
+      const vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    }
+    
+    setViewportHeight()
+    window.addEventListener('resize', setViewportHeight)
+    window.addEventListener('orientationchange', setViewportHeight)
+    
+    return () => {
+      window.removeEventListener('resize', setViewportHeight)
+      window.removeEventListener('orientationchange', setViewportHeight)
+    }
+  }, [])
+
   return (
     <div ref={containerRef} className="relative w-full min-h-full">
       {/* Waves Background */}
-      <div className="fixed inset-0 w-full h-full overflow-hidden" style={{ zIndex: 0 }}>
+      <div className="fixed inset-0 w-full overflow-hidden" style={{ zIndex: 0, height: '100dvh' }}>
         <Waves className="h-full w-full" strokeColor="#ffffff" backgroundColor="#000000" />
       </div>
 
