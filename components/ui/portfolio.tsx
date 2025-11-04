@@ -14,23 +14,45 @@ export function Portfolio() {
     const handleScroll = () => {
       const sections = ['hero', 'gallery', 'about', 'contact']
       const scrollPosition = window.scrollY + window.innerHeight / 2
+      let current = 'hero'
 
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId)
         if (element) {
-          const { offsetTop, offsetHeight } = element
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setCurrentSection(sectionId)
+          const rect = element.getBoundingClientRect()
+          const elementTop = window.scrollY + rect.top
+          const elementBottom = elementTop + rect.height
+          
+          if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
+            current = sectionId
             break
           }
         }
       }
+
+      setCurrentSection(current)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    // Use requestAnimationFrame for smooth updates
+    let rafId: number | null = null
+    const onScroll = () => {
+      if (rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          handleScroll()
+          rafId = null
+        })
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
     handleScroll() // Initial check
 
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+      }
+    }
   }, [])
 
   // Placeholder images - using Unsplash placeholders
@@ -80,11 +102,6 @@ export function Portfolio() {
           className="min-h-screen w-full flex items-center justify-center snap-start snap-always"
         >
           <div className="container mx-auto px-4 md:px-8 text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              <span className="text-with-underlay">
-                {currentSection === 'hero' ? 'Innovative Solutions' : 'Home'}
-              </span>
-            </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
               <span className="text-with-underlay-sm">
                 Transforming ideas into reality through creative excellence and technical expertise. 
@@ -100,11 +117,6 @@ export function Portfolio() {
           className="min-h-screen w-full flex items-center justify-center snap-start snap-always py-20"
         >
           <div className="container mx-auto px-4 md:px-8">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-12 text-center">
-              <span className="text-with-underlay">
-                {currentSection === 'gallery' ? 'Our Work' : 'Gallery'}
-              </span>
-            </h2>
             <div className="overflow-x-auto pb-4 scrollbar-hide">
               <div className="flex gap-3 sm:gap-4 md:gap-6 lg:gap-8 px-4">
                 {galleryImages.map((image, index) => (
@@ -137,11 +149,6 @@ export function Portfolio() {
           className="min-h-screen w-full flex items-center justify-center snap-start snap-always py-20"
         >
           <div className="container mx-auto px-4 md:px-8">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-12 text-center">
-              <span className="text-with-underlay">
-                {currentSection === 'about' ? 'About Us' : 'About'}
-              </span>
-            </h2>
             <div className="max-w-4xl mx-auto">
               <div className="flex flex-col items-center gap-8 md:gap-12">
                 <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 flex-shrink-0">
@@ -178,11 +185,6 @@ export function Portfolio() {
           className="min-h-screen w-full flex items-center justify-center snap-start snap-always py-20"
         >
           <div className="container mx-auto px-4 md:px-8 text-center">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-12">
-              <span className="text-with-underlay">
-                {currentSection === 'contact' ? 'Get In Touch' : 'Contact'}
-              </span>
-            </h2>
             <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12">
               <a
                 href="mailto:contact@example.com"
