@@ -316,7 +316,6 @@ function WavesDemo() {
     }, this);
 }
 _c = WavesDemo;
-;
 var _c;
 __turbopack_context__.k.register(_c, "WavesDemo");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {

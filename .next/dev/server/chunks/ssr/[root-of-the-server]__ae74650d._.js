@@ -308,7 +308,6 @@ function WavesDemo() {
         columnNumber: 5
     }, this);
 }
-;
 }),
 "[project]/node_modules/next/dist/server/route-modules/app-page/module.compiled.js [app-ssr] (ecmascript)", ((__turbopack_context__, module, exports) => {
 "use strict";
