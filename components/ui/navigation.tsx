@@ -11,7 +11,6 @@ export function Navigation({ currentSection }: NavigationProps) {
     { id: 'hero', label: 'Home' },
     { id: 'gallery', label: 'Gallery' },
     { id: 'about', label: 'About' },
-    { id: 'contact', label: 'Contact' },
   ]
 
   // Debug: log current section

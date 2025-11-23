@@ -47,7 +47,7 @@ export function Portfolio() {
     // Don't set up scroll detection until content is loaded
     if (!content) return
 
-    const sections = ['hero', 'gallery', 'about', 'contact']
+    const sections = ['hero', 'gallery', 'about']
     
     const handleScroll = () => {
       const viewportCenter = window.innerHeight / 2
@@ -173,11 +173,41 @@ export function Portfolio() {
           className="min-h-screen w-full flex items-center justify-center snap-start snap-always"
         >
           <div className="container mx-auto px-4 md:px-8 text-center">
-            <p className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed mb-8 md:mb-12">
               <span className="text-with-underlay-sm">
                 {content.hero.text}
               </span>
             </p>
+            <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 mt-8">
+              <a
+                href={content.contact.email.href}
+                className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
+              >
+                <span className="text-with-underlay-sm">{content.contact.email.text}</span>
+              </a>
+              <a
+                href={content.contact.phone.href}
+                className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
+              >
+                <span className="text-with-underlay-sm">{content.contact.phone.text}</span>
+              </a>
+              <a
+                href={content.contact.instagram.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
+              >
+                <span className="text-with-underlay-sm">{content.contact.instagram.text}</span>
+              </a>
+              <a
+                href={content.contact.linkedin.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
+              >
+                <span className="text-with-underlay-sm">{content.contact.linkedin.text}</span>
+              </a>
+            </div>
           </div>
         </section>
 
@@ -245,44 +275,6 @@ export function Portfolio() {
           </div>
         </section>
 
-        {/* Section 4: Contact */}
-        <section
-          id="contact"
-          className="min-h-screen w-full flex items-center justify-center snap-start snap-always py-20"
-        >
-          <div className="container mx-auto px-4 md:px-8 text-center">
-            <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12">
-              <a
-                href={content.contact.email.href}
-                className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
-              >
-                <span className="text-with-underlay-sm">{content.contact.email.text}</span>
-              </a>
-              <a
-                href={content.contact.phone.href}
-                className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
-              >
-                <span className="text-with-underlay-sm">{content.contact.phone.text}</span>
-              </a>
-              <a
-                href={content.contact.instagram.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
-              >
-                <span className="text-with-underlay-sm">{content.contact.instagram.text}</span>
-              </a>
-              <a
-                href={content.contact.linkedin.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold transition-opacity duration-300 hover:opacity-80"
-              >
-                <span className="text-with-underlay-sm">{content.contact.linkedin.text}</span>
-              </a>
-            </div>
-          </div>
-        </section>
       </div>
     </div>
   )
