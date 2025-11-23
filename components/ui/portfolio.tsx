@@ -44,47 +44,11 @@ export function Portfolio() {
   }, [])
 
   useEffect(() => {
+    // Don't set up scroll detection until content is loaded
+    if (!content) return
+
     const sections = ['hero', 'gallery', 'about', 'contact']
-    const sectionElements = sections.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[]
     
-    if (sectionElements.length === 0) return
-
-    // Use IntersectionObserver for better accuracy
-    const observerOptions = {
-      root: null, // viewport
-      rootMargin: '-20% 0px -20% 0px', // Require at least 60% visibility
-      threshold: [0, 0.5, 1.0]
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      // Find the entry with the highest intersection ratio
-      let maxRatio = 0
-      let mostVisible: string | null = null
-
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
-          maxRatio = entry.intersectionRatio
-          mostVisible = entry.target.id
-        }
-      })
-
-      // If we found a visible section, update state
-      if (mostVisible) {
-        setCurrentSection((prev) => {
-          if (prev !== mostVisible) {
-            return mostVisible as string
-          }
-          return prev
-        })
-      }
-    }, observerOptions)
-
-    // Observe all sections
-    sectionElements.forEach(element => {
-      observer.observe(element)
-    })
-
-    // Fallback: also check on scroll for immediate feedback
     const handleScroll = () => {
       const viewportCenter = window.innerHeight / 2
       let current = 'hero'
@@ -107,6 +71,42 @@ export function Portfolio() {
       setCurrentSection(current)
     }
 
+    // Use IntersectionObserver for better accuracy
+    const observerOptions = {
+      root: null, // viewport
+      rootMargin: '-30% 0px -30% 0px', // Require section to be in center portion of viewport
+      threshold: [0, 0.25, 0.5, 0.75, 1.0]
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      // Find the entry with the highest intersection ratio that's intersecting
+      let maxRatio = 0
+      let mostVisible: string | null = null
+
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+          maxRatio = entry.intersectionRatio
+          mostVisible = entry.target.id
+        }
+      })
+
+      // If we found a visible section, update state
+      if (mostVisible) {
+        setCurrentSection(mostVisible)
+      }
+    }, observerOptions)
+
+    // Get section elements after content is loaded
+    const sectionElements = sections.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[]
+    
+    if (sectionElements.length > 0) {
+      // Observe all sections
+      sectionElements.forEach(element => {
+        observer.observe(element)
+      })
+    }
+
+    // Also check on scroll for immediate feedback
     let ticking = false
     const onScroll = () => {
       if (!ticking) {
@@ -120,14 +120,14 @@ export function Portfolio() {
 
     window.addEventListener('scroll', onScroll, { passive: true })
     
-    // Initial check
+    // Initial check after a short delay to ensure DOM is ready
     setTimeout(() => handleScroll(), 100)
 
     return () => {
       observer.disconnect()
       window.removeEventListener('scroll', onScroll)
     }
-  }, [])
+  }, [content])
 
 
   // Handle iPhone Safari viewport height issue

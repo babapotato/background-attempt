@@ -34,10 +34,6 @@ export interface PortfolioContent {
 }
 
 export async function getPortfolioContent(): Promise<PortfolioContent | null> {
-  if (!client) {
-    return null
-  }
-  
   try {
     const query = `*[_type == "portfolio"][0]`
     const data = await client.fetch(query)

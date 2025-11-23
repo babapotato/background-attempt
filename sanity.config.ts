@@ -6,7 +6,7 @@ import { schemaTypes } from './schemas'
 export default defineConfig({
   name: 'portfolio',
   title: 'Portfolio Content',
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '10fguqc8',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   basePath: '/studio',
   plugins: [structureTool(), visionTool()],
