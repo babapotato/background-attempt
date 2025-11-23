@@ -63,7 +63,7 @@
     height: 100dvh; /* Dynamic viewport height for mobile Safari */
     min-height: 100vh;
     min-height: 100dvh;
-    background-color: #000000;
+    background-color: #0000ff;
     overflow-x: hidden;
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;

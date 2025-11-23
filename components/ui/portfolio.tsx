@@ -159,7 +159,7 @@ export function Portfolio() {
     <div ref={containerRef} className="relative w-full min-h-full">
       {/* Waves Background */}
       <div className="fixed inset-0 w-full overflow-hidden" style={{ zIndex: 0, height: '100dvh' }}>
-        <Waves className="h-full w-full" strokeColor="#ffffff" backgroundColor="#000000" />
+        <Waves className="h-full w-full" strokeColor="#ffffff" backgroundColor="#0000ff" />
       </div>
 
       {/* Navigation */}
